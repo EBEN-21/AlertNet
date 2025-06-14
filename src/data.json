@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Rivers State Police Command",
+    "type": "Police",
+    "phone": "07039194332",
+    "lat": 4.7993,
+    "lng": 7.0128
+  },
+  {
+    "name": "Port Harcourt Fire Service",
+    "type": "Fire Service",
+    "phone": "08100004567",
+    "lat": 4.8076,
+    "lng": 6.9917
+  },
+  {
+    "name": "UPTH Emergency Unit",
+    "type": "Hospital",
+    "phone": "08033083952",
+    "lat": 4.8854,
+    "lng": 6.9934
+  },
+  {
+    "name": "First Rivers Hospital",
+    "type": "Hospital",
+    "phone": "08125221300",
+    "lat": 4.8261,
+    "lng": 7.0135
+  },
+  {
+    "name": "Nigerian Red Cross - PH Branch",
+    "type": "Ambulance",
+    "phone": "07032924337",
+    "lat": 4.8125,
+    "lng": 7.0498
+  },
+  {
+    "name": "LifeLine Ambulance Services",
+    "type": "Ambulance",
+    "phone": "08091234567",
+    "lat": 4.7899,
+    "lng": 6.9853
+  },
+  {
+    "name": "Elekahia Police Station",
+    "type": "Police",
+    "phone": "07054321098",
+    "lat": 4.7997,
+    "lng": 7.0244
+  },
+  {
+    "name": "Rivers State Fire & Rescue HQ",
+    "type": "Fire Service",
+    "phone": "08130004567",
+    "lat": 4.8232,
+    "lng": 6.9922
+  },
+  {
+    "name": "Braithwaite Memorial Specialist Hospital",
+    "type": "Hospital",
+    "phone": "08123456789",
+    "lat": 4.7779,
+    "lng": 7.0107
+  },
+  {
+    "name": "Greater PH Police Post",
+    "type": "Police",
+    "phone": "07091234567",
+    "lat": 4.8911,
+    "lng": 7.0493
+  },
+  {
+    "name": "Mile 3 Fire Station",
+    "type": "Fire Service",
+    "phone": "08034567891",
+    "lat": 4.8355,
+    "lng": 6.9942
+  },
+  {
+    "name": "Holy Trinity Medical Centre",
+    "type": "Hospital",
+    "phone": "08136789124",
+    "lat": 4.7954,
+    "lng": 7.0316
+  },
+  {
+    "name": "Niger Delta Ambulance Service",
+    "type": "Ambulance",
+    "phone": "08129000000",
+    "lat": 4.7621,
+    "lng": 7.0421
+  },
+  {
+    "name": "Ozuoba Police Division",
+    "type": "Police",
+    "phone": "08033455678",
+    "lat": 4.8651,
+    "lng": 6.9742
+  },
+  {
+    "name": "Trans Amadi Fire Station",
+    "type": "Fire Service",
+    "phone": "08123344556",
+    "lat": 4.8055,
+    "lng": 7.0461
+  },
+  {
+    "name": "Healthwise Clinic and Maternity",
+    "type": "Hospital",
+    "phone": "08024567891",
+    "lat": 4.7911,
+    "lng": 7.0011
+  },
+  {
+    "name": "Southgate Ambulance",
+    "type": "Ambulance",
+    "phone": "08091110000",
+    "lat": 4.8123,
+    "lng": 6.9785
+  },
+  {
+    "name": "Diobu Police Station",
+    "type": "Police",
+    "phone": "08065543210",
+    "lat": 4.8023,
+    "lng": 6.9982
+  },
+  {
+    "name": "Rumuokwuta Fire Department",
+    "type": "Fire Service",
+    "phone": "08136661234",
+    "lat": 4.8475,
+    "lng": 6.9951
+  },
+  {
+    "name": "Port Harcourt General Hospital",
+    "type": "Hospital",
+    "phone": "08012345678",
+    "lat": 4.7849,
+    "lng": 6.9933
+  }
+]
