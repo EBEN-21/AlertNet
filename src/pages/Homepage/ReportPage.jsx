@@ -24,6 +24,7 @@ const ReportPage = () => {
   const [imageBase64, setImageBase64] = useState(null);
   const [alertedService, setAlertedService] = useState(null);
   const [locationError, setLocationError] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
   if (alertedService) {
@@ -48,7 +49,8 @@ const ReportPage = () => {
 
   const handleReport = async () => {
     if (!type || !severity || !accidentLocation || !accidentTime || !description) {
-      alert('Please fill in all form fields.');
+     setFormError(' Please fill in all form fields before submitting.');
+    setTimeout(() => setFormError(''), 3000);
       return;
     }
 
@@ -88,7 +90,7 @@ const ReportPage = () => {
 
         setNearbyServices(filtered);
       } else {
-        setLocationError('  Location not found. Please try a more specific location (e.g. GRA Phase 2, Port Harcourt).');
+        setLocationError('  Location not found. Please try a more specific location (e.g. Uniport rivers state).');
       }
     } catch (err) {
       alert('Failed to fetch location: ' + err.message);
@@ -142,7 +144,7 @@ const ReportPage = () => {
                   setAccidentLocation(e.target.value);
                   setLocationError('');
                 }}
-                placeholder="e.g GRA Phase 2, Port Harcourt"
+                placeholder="e.g Uniport Rivers state"
               />
               {locationError && (
                 <p className="text-sm text-red-400 mt-1">{locationError}</p>
@@ -165,7 +167,7 @@ const ReportPage = () => {
                 className="w-full p-2 rounded-lg bg-gray-700 text-white"
                 rows="3"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value) } 
                 placeholder="Describe what happened"
               ></textarea>
             </div>
@@ -200,6 +202,11 @@ const ReportPage = () => {
               </div>
             )}
 
+            {formError && (
+              <div className="bg-red-600/10 border border-red-600 text-red-400 text-sm px-4 py-2 rounded-md">
+                {formError}
+              </div>
+            )}
             <button
               onClick={handleReport}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-xl w-full"
