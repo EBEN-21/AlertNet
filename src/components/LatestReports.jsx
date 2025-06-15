@@ -35,17 +35,18 @@ const LatestReports = () => {
 
     const storedReports = JSON.parse(localStorage.getItem('accidentReports')) || [];
 
-    const newestFirst = [...storedReports].reverse();
-    const maxReports = 6;
+  // Ensure new reports come first
+  const newestFirst = [...storedReports].reverse();
+  const maxReports = 6;
 
-    let combined = [...newestFirst];
-    if (combined.length < maxReports) {
-      const remaining = maxReports - combined.length;
-      combined = [...combined, ...dummyReports.slice(0, remaining)];
-    }
+  // Add dummy reports if there aren't enough user reports
+  const remaining = maxReports - newestFirst.length;
+  const filled = remaining > 0
+    ? [...newestFirst, ...dummyReports.slice(0, remaining)]
+    : newestFirst;
 
-    setReports(combined);
-  }, []);
+  setReports(filled);
+}, []);
 
   const getSeverityColor = (severity) => {
     switch (severity) {
