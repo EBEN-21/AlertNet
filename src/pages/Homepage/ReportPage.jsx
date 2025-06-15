@@ -172,11 +172,20 @@ const ReportPage = () => {
 
             <div>
               <label className="block mb-1 text-sm">Upload Image</label>
+
+              <label
+                htmlFor="fileInput"
+                className="inline-block cursor-pointer bg-gray-700 hover:bg-gray-600 text-white text-sm px-4 py-2 rounded-lg shadow transition duration-200"
+              >
+                📷 Choose Image
+              </label>
+
               <input
                 type="file"
+                id="fileInput"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="w-full p-2 rounded-lg bg-gray-700 text-white"
+                className="hidden"
               />
             </div>
 
@@ -259,7 +268,7 @@ const ReportPage = () => {
     <div className="flex-1">
       <p className="font-semibold text-base">🚨 Emergency Alert Sent!</p>
       <p className="text-sm leading-tight">
-        <span className="font-medium">{alertedService}</span> has been notified and is on standby.
+        <span className="font-medium">{alertedService}</span> has been notified and will arrive in 10 mins.
       </p>
     </div>
   </div>
