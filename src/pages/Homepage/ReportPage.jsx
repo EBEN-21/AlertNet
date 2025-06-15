@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -22,6 +22,17 @@ const ReportPage = () => {
   const [nearbyServices, setNearbyServices] = useState([]);
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
+  const [alertedService, setAlertedService] = useState(null);
+  const [locationError, setLocationError] = useState('');
+
+  useEffect(() => {
+  if (alertedService) {
+    const timer = setTimeout(() => {
+      setAlertedService(null);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }
+}, [alertedService]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -43,9 +54,7 @@ const ReportPage = () => {
 
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-          accidentLocation
-        )}`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(accidentLocation)}`
       );
       const data = await response.json();
 
@@ -54,6 +63,7 @@ const ReportPage = () => {
         const accidentLatLng = { lat: parseFloat(lat), lng: parseFloat(lon) };
         setLocation(accidentLatLng);
         setSubmitted(true);
+        setLocationError('');
 
         const reportData = {
           type,
@@ -78,7 +88,7 @@ const ReportPage = () => {
 
         setNearbyServices(filtered);
       } else {
-        alert('Location not found. Please try something more specific.');
+        setLocationError('  Location not found. Please try a more specific location (e.g. GRA Phase 2, Port Harcourt).');
       }
     } catch (err) {
       alert('Failed to fetch location: ' + err.message);
@@ -91,7 +101,7 @@ const ReportPage = () => {
         <div className="bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md">
           <h1 className="text-2xl font-bold mb-4">Report an Accident</h1>
           <div className="space-y-4">
-           <div>
+            <div>
               <label className="block mb-1 text-sm">Type Of Accident</label>
               <select
                 className="w-full p-2 rounded-lg bg-gray-700 text-white"
@@ -122,15 +132,23 @@ const ReportPage = () => {
                 <option value="Severe">Severe</option>
               </select>
             </div>
+
             <div>
               <label className="block mb-1 text-sm">Location</label>
               <input
                 className="w-full p-2 rounded-lg bg-gray-700 text-white"
                 value={accidentLocation}
-                onChange={(e) => setAccidentLocation(e.target.value)}
+                onChange={(e) => {
+                  setAccidentLocation(e.target.value);
+                  setLocationError('');
+                }}
                 placeholder="e.g GRA Phase 2, Port Harcourt"
               />
+              {locationError && (
+                <p className="text-sm text-red-400 mt-1">{locationError}</p>
+              )}
             </div>
+
             <div>
               <label className="block mb-1 text-sm">Time Of Accident</label>
               <input
@@ -140,6 +158,7 @@ const ReportPage = () => {
                 placeholder="e.g 5 minutes ago"
               />
             </div>
+
             <div>
               <label className="block mb-1 text-sm">Description</label>
               <textarea
@@ -150,6 +169,7 @@ const ReportPage = () => {
                 placeholder="Describe what happened"
               ></textarea>
             </div>
+
             <div>
               <label className="block mb-1 text-sm">Upload Image</label>
               <input
@@ -159,6 +179,7 @@ const ReportPage = () => {
                 className="w-full p-2 rounded-lg bg-gray-700 text-white"
               />
             </div>
+
             {imageBase64 && (
               <div className="mt-2">
                 <p className="text-sm text-gray-400 mb-1">Image Preview:</p>
@@ -169,6 +190,7 @@ const ReportPage = () => {
                 />
               </div>
             )}
+
             <button
               onClick={handleReport}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-xl w-full"
@@ -197,33 +219,54 @@ const ReportPage = () => {
                 <Marker key={i} position={[service.lat, service.lng]}>
                   <Popup>
                     <strong>{service.name}</strong><br />
-                    Type: {service.type}<br />
-                    ☎ {service.phone}
+                    Type: {service.type}
                   </Popup>
                 </Marker>
               ))}
             </MapContainer>
           )}
+
           <div className="mt-6 bg-gray-700 p-4 rounded-xl space-y-3">
             <h3 className="text-lg font-semibold text-yellow-400">Nearby Emergency Services</h3>
             <ul className="space-y-2">
               {nearbyServices.length > 0 ? (
                 nearbyServices.map((s, i) => (
-                  <li key={i} className="bg-gray-600 p-2 rounded text-white">
-                    <strong>{s.name}</strong> - {s.type}<br />
-                    ☎ {s.phone}
+                  <li
+                    key={i}
+                    onClick={() => setAlertedService(s.name)}
+                    className="cursor-pointer bg-gray-600 p-2 rounded hover:bg-gray-500 transition"
+                  >
+                    <strong>{s.name}</strong> - {s.type}
                   </li>
                 ))
               ) : (
                 <p className="text-gray-300">No services found near this location.</p>
               )}
             </ul>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full">
+
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full mt-4">
               <a href="/">🔙 Back to Home</a>
             </button>
           </div>
         </div>
       )}
+
+      {alertedService && (
+  <div className="fixed z-[9999] max-w-sm w-[90%] sm:w-auto px-5 py-4 rounded-xl shadow-lg bg-green-600 text-white 
+                  animate-fade-in-up flex gap-3 items-start
+                  bottom-4 left-1/2 -translate-x-1/2 
+                  sm:top-4 sm:bottom-auto sm:left-auto sm:right-4 sm:translate-x-0">
+    <div className="flex-1">
+      <p className="font-semibold text-base">🚨 Emergency Alert Sent!</p>
+      <p className="text-sm leading-tight">
+        <span className="font-medium">{alertedService}</span> has been notified and is on standby.
+      </p>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 };

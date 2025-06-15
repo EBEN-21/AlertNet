@@ -12,7 +12,7 @@ const Hero = () => {
 
       {/* 📝 Text Content */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center h-full px-6">
-        <h2 className="text-yellow-400 text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+        <h2 className="text-yellow-400 text-xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
           Accidents Don't Wait. Neither Should You
         </h2>
         <p className="text-gray-100 max-w-xl mb-6 text-base sm:text-lg">

@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="absolute top-0 left-0 w-full px-6 sm:px-20 py-10 flex items-center justify-between z-50 bg-transparent">
       {/* Logo */}
-      <a href="/"><h2 className="text-gray-100 font-bold text-3xl tracking-wide">AlertNet</h2></a>
+      <a href="/"><h2 className="text-gray-100 font-bold text-xl md:text-3xl tracking-wide">AlertNet</h2></a>
       
 
       {/* Navigation Links */}
