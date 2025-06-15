@@ -61,7 +61,7 @@ const LatestReports = () => {
   };
 
   return (
-    <section className="pt-20 px-4 sm:px-20 bg-gray-950 min-h-[50vh]">
+    <section id='latest-reports' className="pt-20 px-4 sm:px-20 bg-gray-950 min-h-[50vh]">
       <h2 className="text-3xl font-bold text-center text-white mb-6">📰 Latest Reports</h2>
 
       {reports.length === 0 ? (
