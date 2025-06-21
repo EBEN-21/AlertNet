@@ -50,10 +50,10 @@ const ReportPage = () => {
   const handleReport = async () => {
     if (!type || !severity || !accidentLocation || !accidentTime || !description) {
      setFormError(' Please fill in all form fields before submitting.');
-    setTimeout(() => setFormError(''), 3000);
+    setTimeout(() => setFormError(''), 3000); 
       return;
     }
-
+// random
     try {
       const response = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(accidentLocation)}`
